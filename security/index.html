@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security — Vixera AI</title>
+  <meta name="description" content="Security at Vixera AI is a set of design constraints, not a marketing page: encryption in transit, least-privilege permissions, OAuth over passwords, tenant isolation and user-controlled revocation.">
+  <link rel="canonical" href="https://vixera.ai/security/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Vixera AI">
+  <meta property="og:title" content="Security — Vixera AI">
+  <meta property="og:description" content="Security as architecture: the design constraints every Vixera AI product is built under — and the claims we refuse to make before they are verifiable.">
+  <meta property="og:url" content="https://vixera.ai/security/">
+  <meta property="og:image" content="https://vixera.ai/assets/img/vixera-lockup.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security — Vixera AI">
+  <meta name="twitter:description" content="Security as architecture: the design constraints every Vixera AI product is built under — and the claims we refuse to make before they are verifiable.">
+  <meta name="twitter:image" content="https://vixera.ai/assets/img/vixera-lockup.png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Jost:ital,wght@0,200;0,300;0,400;1,300&display=swap">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Vixera AI",
+    "url": "https://vixera.ai/",
+    "logo": "https://vixera.ai/assets/img/icon-512.png",
+    "description": "Vixera AI builds intelligent operating systems for business, documents, home, markets and everyday life."
+  }
+  </script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ══ HEADER (shared chrome — keep identical on every page) ══ -->
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a class="nav-logo" href="/">
+      <img src="/assets/img/vixera-logo.png" alt="" width="24" height="24">
+      <span><b>VIXERA</b> <i>AI</i></span>
+    </a>
+    <ul class="nav-links">
+      <li>
+        <button class="nav-item" data-mega-btn aria-expanded="false">Products <span class="caret" aria-hidden="true"></span></button>
+        <div class="mega" data-mega aria-label="Products">
+          <a href="/products/vixera/">
+            <div class="m-cat">Business</div>
+            <div class="m-name">Vixera</div>
+            <div class="m-desc">Business Operating System</div>
+          </a>
+          <a href="/products/praxion/">
+            <div class="m-cat">Documents</div>
+            <div class="m-name">Praxion</div>
+            <div class="m-desc">Document Intelligence</div>
+          </a>
+          <a href="/products/pantrix/">
+            <div class="m-cat">Home</div>
+            <div class="m-name">Pantrix</div>
+            <div class="m-desc">Home Intelligence</div>
+          </a>
+          <a href="/products/praevion/">
+            <div class="m-cat">Intelligence</div>
+            <div class="m-name">Praevion</div>
+            <div class="m-desc">Predictive &amp; Financial Intelligence</div>
+          </a>
+          <a href="/vixera-one/">
+            <div class="m-cat">Personal</div>
+            <div class="m-name">Vixera One <span class="soon-pill">Coming soon</span></div>
+            <div class="m-desc">Personal Intelligence</div>
+          </a>
+          <a href="/products/">
+            <div class="m-cat">Overview</div>
+            <div class="m-name">All products</div>
+            <div class="m-desc">The Vixera AI ecosystem</div>
+          </a>
+        </div>
+      </li>
+      <li><a href="/vixera-one/">Vixera One</a></li>
+      <li><a href="/about/">Company</a></li>
+      <li><a href="/updates/">Updates</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a class="nav-contact" href="/contact/">Contact</a>
+      <a class="btn primary" href="/vixera-one/" data-track="vixera_one_preview_clicked">Explore Vixera One</a>
+      <button class="nav-burger" data-burger aria-expanded="false" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" data-mobile-menu>
+    <div class="mm-group">
+      <div class="mm-label">Products</div>
+      <a href="/products/vixera/">Vixera <span class="mm-cat">Business</span></a>
+      <a href="/products/praxion/">Praxion <span class="mm-cat">Documents</span></a>
+      <a href="/products/pantrix/">Pantrix <span class="mm-cat">Home</span></a>
+      <a href="/products/praevion/">Praevion <span class="mm-cat">Intelligence</span></a>
+      <a href="/vixera-one/">Vixera One <span class="mm-cat">Coming soon</span></a>
+    </div>
+    <div class="mm-group">
+      <div class="mm-label">Company</div>
+      <a href="/about/">About</a>
+      <a href="/updates/">Updates</a>
+      <a href="/security/">Security</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="mm-cta">
+      <a class="btn primary" href="/vixera-one/">Explore Vixera One</a>
+      <a class="btn" href="/products/">All products</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="container">
+      <p class="eyebrow">Security</p>
+      <h1 class="display">Security as<br>architecture.</h1>
+      <p class="lead">At Vixera AI, security is a set of <strong>design constraints</strong>, not a marketing page. Every product in the ecosystem is built under the same rules — and where a product is still being built, those rules are decided before the first feature is.</p>
+    </div>
+  </section>
+
+  <!-- ══ PRINCIPLES ══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">Principles</p>
+        <h2 class="h2">Eight constraints.<br>Every product.</h2>
+        <p class="lead">These are the rules our products are designed under. Where something is planned rather than shipped, we say so in plain words.</p>
+      </div>
+
+      <div class="feature-grid cols2 reveal">
+        <div class="feature">
+          <div class="f-title">Encryption in transit</div>
+          <div class="f-body">Traffic between you and Vixera AI products travels over encrypted connections. Data does not move between our systems and yours in the clear.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">Secure authentication</div>
+          <div class="f-body">Access to a Vixera AI product requires authentication — sessions are tied to a signed-in identity, and credentials are never stored in plain text.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">Least-privilege permissions</div>
+          <div class="f-body">Roles and permissions are scoped to what a person actually needs. In Vixera, a warehouse operator and an administrator see different systems — by design, not by convention.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">Integration controls</div>
+          <div class="f-body">Integrations are designed to be connected and revoked individually. One connection going away should never mean tearing down your whole account — each link stands, and falls, on its own.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">OAuth over passwords</div>
+          <div class="f-body">Where our products connect to outside services, they are designed to use scoped, revocable authorization — OAuth — rather than asking you to hand over a password to another system.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">Financial data through regulated providers</div>
+          <div class="f-body">Planned financial features in Praevion and Vixera One are designed to read account data through regulated providers such as Plaid. We do not ask for, and will not store, raw banking credentials.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">Data isolation</div>
+          <div class="f-body">Vixera is multi-tenant: each business's data lives in its own tenant, invisible to every other. The same constraint carries into everything we build — your data is partitioned from everyone else's, user by user.</div>
+        </div>
+        <div class="feature">
+          <div class="f-title">User control and revocation</div>
+          <div class="f-body">What is connected, what is shared and what is remembered stays under your control. Access you grant is access you can take back — and revocation is designed to take effect immediately, not on a support ticket's schedule.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHAT WE DO NOT CLAIM ══ -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">What we do not claim</p>
+        <h2 class="h2">No badges we haven't earned.</h2>
+      </div>
+      <div class="prose reveal">
+        <p>You will not find compliance logos on this page. Vixera AI does not advertise certifications — SOC&nbsp;2, ISO, or any other — until they have been achieved and can be independently verified. A badge that can't be checked is decoration, and decoration is not security. When an audit is completed, it will be announced here with the evidence to back it. Until then, the honest description of our posture is the one above: a set of architectural constraints, applied to every product. If you have a security question, or you've found something we should know about, we want to hear it — <a href="/contact/">write to us</a>.</p>
+      </div>
+      <p class="reveal" style="margin-top:28px;">
+        <a class="text-link" href="/vixera-one/">See how Vixera One applies these rules — connected by permission <span class="arrow">→</span></a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ FOOTER (shared chrome — keep identical on every page) ══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="nav-logo" href="/">
+          <img src="/assets/img/vixera-logo.png" alt="" width="24" height="24">
+          <span><b>VIXERA</b> <i>AI</i></span>
+        </a>
+        <p>Intelligent operating systems for business, documents, home, markets and everyday life.</p>
+      </div>
+      <div class="footer-col">
+        <div class="f-head">Products</div>
+        <a href="/products/vixera/">Vixera</a>
+        <a href="/products/praxion/">Praxion</a>
+        <a href="/products/pantrix/">Pantrix</a>
+        <a href="/products/praevion/">Praevion</a>
+        <a href="/vixera-one/">Vixera One</a>
+      </div>
+      <div class="footer-col">
+        <div class="f-head">Company</div>
+        <a href="/about/">About</a>
+        <a href="/updates/">Updates</a>
+        <a href="/security/">Security</a>
+        <a href="/contact/">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="f-head">Legal</div>
+        <a href="/privacy/">Privacy</a>
+        <a href="/terms/">Terms</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Vixera AI</span>
+      <span>Built to operate, not just answer.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
